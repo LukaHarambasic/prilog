@@ -25,7 +25,7 @@ Log your life and share it with everybody, even your grandparents. It combines T
 
 ## Architecture
 
-- Frontend (Vue 3 + Vite)
+- Frontend (Vue 3 + Vite) - could be one combined layout
     - Viewer
         - Logs overview
         - Log
