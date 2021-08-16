@@ -48,7 +48,7 @@ import { sb } from '@/assets/js/supabase'
 const props = defineProps({
   logId: {
     type: String,
-    required: true
+    default: ''
   }
 })
 const { logId } = toRefs(props)
@@ -81,7 +81,6 @@ async function onCreate () {
 }
 
 // Form: Validation
-console.log(logId.value)
 const isValid = computed(() => !!logId.value && !!title.value && !!markdown.value && !!chronological.value)
 
 </script>

@@ -1,6 +1,24 @@
 <template>
-  <h1>prilog</h1>
-  <router-view />
+  <header>
+    <h1>prilog</h1>
+    <nav>
+      <ul>
+        <li>
+          <router-link to="/admin/create/log">
+            Create Log
+          </router-link>
+        </li>
+        <li>
+          <router-link to="/admin/create/entry">
+            Create Entry
+          </router-link>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <router-view />
+  </main>
 </template>
 
 <script setup>

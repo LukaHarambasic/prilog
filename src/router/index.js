@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
-import AdminCreate from '@/views/Admin/AdminCreate.vue'
+import LogsDetails from '@/views/Logs/LogsDetails.vue'
+import AdminCreateLog from '@/views/Admin/AdminCreateLog.vue'
+import AdminCreateEntry from '@/views/Admin/AdminCreateEntry.vue'
 import AdminIndex from '@/views/Admin/AdminIndex.vue'
 
 const routes = [
@@ -10,14 +12,24 @@ const routes = [
     component: Home
   },
   {
+    path: '/logs/:id',
+    name: 'logsDetails',
+    component: LogsDetails
+  },
+  {
     path: '/admin',
     name: 'admin',
     component: AdminIndex
   },
   {
-    path: '/admin/create',
-    name: 'create',
-    component: AdminCreate
+    path: '/admin/create/log',
+    name: 'createLog',
+    component: AdminCreateLog
+  },
+  {
+    path: '/admin/create/entry',
+    name: 'createEntry',
+    component: AdminCreateEntry
   }
 ]
 

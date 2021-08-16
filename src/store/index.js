@@ -1,20 +1,40 @@
 import { defineStore } from 'pinia'
-// import { logs } from '../../test/mock/logs.mock'
+import { TYPES as RAW_TYPES } from '@/assets/js/consts/types'
+import { sb } from '@/assets/js/supabase'
 
-// main is the name of the store. It is unique across your application
-// and will appear in devtools
 export const useMainStore = defineStore('main', {
-  // a function that returns a fresh state
   state: () => ({
-    logs: []
+    logs: [],
+    types: RAW_TYPES
   }),
-  // optional getters
   getters: {
+    logById (id) {
+      console.log(this.logs.value)
+      return this.logs.find(log => {
+        console.log('log.id', log.id)
+        console.log('id', id)
+        return log.id === id
+      })
+    },
     logsEntitiesById (id) {
       return this.logs.find(log => log.id === id)
     }
   },
-  // optional actions
   actions: {
+    async fetchLogs () {
+      const { data, error } = await sb
+        .from('logs')
+        .select(`
+          *,
+          log_entries (
+            *
+          )
+        `)
+      if (error) {
+        console.error('ERROR', error)
+      } else {
+        this.logs = data
+      }
+    }
   }
 })
