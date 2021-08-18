@@ -5,19 +5,12 @@ import { sb } from '@/assets/js/supabase'
 export const useMainStore = defineStore('main', {
   state: () => ({
     logs: [],
-    types: RAW_TYPES
+    types: RAW_TYPES,
   }),
   getters: {
-    logById (id) {
-      console.log(this.logs.value)
-      return this.logs.find(log => {
-        console.log('log.id', log.id)
-        console.log('id', id)
-        return log.id === id
-      })
-    },
-    logsEntitiesById (id) {
-      return this.logs.find(log => log.id === id)
+    logById(state) {
+      if(state.logs === []) return {}
+      return state.logs.find(log => log.id === '19a226b2-4754-4d4c-bf8c-a7d867e82245')
     }
   },
   actions: {

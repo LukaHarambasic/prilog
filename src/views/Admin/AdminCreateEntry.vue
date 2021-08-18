@@ -58,7 +58,7 @@ import { sb } from '@/assets/js/supabase'
 const types = ref(RAW_TYPES)
 const selectedType = ref('')
 const selectedComponent = computed(() => {
-  // TODO defualt should also be reflected in the dropdown
+  // TODO default should also be reflected in the dropdown
   switch (selectedType.value) {
     case types.value.IMAGE.id:
       return defineAsyncComponent(() => import('@/components/Admin/Create/AdminCreateEntryImage.vue'))
