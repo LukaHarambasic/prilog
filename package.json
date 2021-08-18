@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^1.21.1",
+    "date-fns": "^2.23.0",
     "marked": "^3.0.0",
     "pinia": "^2.0.0-rc.4",
     "vue": "^3.2.2",

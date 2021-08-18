@@ -1,13 +1,13 @@
 <template>
   <section>
-    <h1>home</h1>
-    <ul v-if="store.logs">
+    <ul class="logs" v-if="store.logs">
       <li
         v-for="log in store.logs"
         :key="log.id"
       >
-        <router-link :to="`/logs/${log.id}`">
-          {{ log.title }}
+        <router-link class="log" :to="`/logs/${log.id}`">
+          <div class="title">{{ log.title }}</div>
+          <p class="description">{{ log.description }}</p>
         </router-link>
       </li>
     </ul>
@@ -30,5 +30,23 @@ onMounted(async () => {
 </script>
 
 <style lang="sass" scoped>
-
+.logs
+  list-style: none
+  padding: 0
+  margin: 0
+  .log
+    padding: 2rem
+    background: #f5f5f5
+    border-radius: .25rem
+    display: block
+    margin: 0 0 2rem 0
+    border: none
+    &:hover
+      transform: scale(1.03)
+      color: #ffffff
+      background: #250856
+    .title
+      font-size: 1.2rem
+      margin: 0 0 .5rem 0
+      font-weight: bold
 </style>

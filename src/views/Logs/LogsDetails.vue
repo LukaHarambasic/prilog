@@ -1,10 +1,14 @@
 <template>
   <section>
-    <h1 v-if="log">{{ log.title }}</h1>
-    <ul v-if="log">
+    <header class="header">
+      <h1 class="title" v-if="log">{{ log.title }}</h1>
+      <p class="description" v-if="log">{{log.description}}</p>
+    </header>
+    <ul class="log" v-if="log">
       <li
         v-for="entry in log.log_entries"
         :key="entry.id"
+        class="entry"
       >
         <component :is="currentComponent(entry.type)" :entry="entry" />
       </li>
@@ -51,5 +55,19 @@ function currentComponent (type) {
 </script>
 
 <style lang="sass" scoped>
-
+.header
+  background: #eeeeee
+  padding: 2rem
+  border-radius: .25rem
+  margin: 0 0 4rem 0
+  .title
+    margin: 0 0 .5rem 0
+.log
+  list-style: none
+  margin: 0
+  padding: 0
+  .entry
+    margin: 0 0 4rem 0
+    &:last-of-type
+      border: none
 </style>

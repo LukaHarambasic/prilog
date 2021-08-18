@@ -1,13 +1,15 @@
 <template>
-  <h3>{{ title }}</h3>
-  <div class="markdown">
-    <div v-html="html" />
-  </div>
+  <logs-details-entry-wrapper :title="title" :location="location" :chronological="chronological">
+    <div class="markdown">
+      <div v-html="html" />
+    </div>
+  </logs-details-entry-wrapper>
 </template>
 
 <script setup>
 import { ref, defineProps, toRefs } from 'vue'
-import { markdownToHTML } from '@/assets/js/remark'
+import { markdownToHTML } from '@/assets/js/markdown'
+import LogsDetailsEntryWrapper from '@/components/LogsDetails/LogsDetailsEntryWrapper.vue'
 
 // Props
 const props = defineProps({
@@ -16,10 +18,12 @@ const props = defineProps({
     required: true
   }
 })
-const { entry } = toRefs(props)
+const { entry: {value} } = toRefs(props)
 
-const title = ref(entry.value.title)
-const html = ref(markdownToHTML(entry.value.markdown))
+const title = ref(value.title)
+const location = ref(value.location)
+const chronological = ref(value.chronological)
+const html = ref(markdownToHTML(value.markdown))
 
 </script>
 

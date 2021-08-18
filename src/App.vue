@@ -1,24 +1,37 @@
 <template>
-  <header>
-    <h1>prilog</h1>
-    <nav>
-      <ul>
-        <li>
-          <router-link to="/admin/create/log">
-            Create Log
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/admin/create/entry">
-            Create Entry
-          </router-link>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <main>
-    <router-view />
-  </main>
+  <div class="container">
+    <header>
+      <h1>
+        <router-link to="/">
+          prilog.
+        </router-link>
+      </h1>
+      <nav>
+        <ul>
+          <li>
+            <router-link to="/admin/create/log">
+              Create Log
+            </router-link>
+          </li>
+          <li>
+            <router-link to="/admin/create/entry">
+              Create Entry
+            </router-link>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <router-view />
+    </main>
+    <footer>
+      <small>
+        <router-link to="/">
+          prilog.
+        </router-link>
+      </small>
+    </footer>
+  </div>
 </template>
 
 <script setup>
@@ -33,6 +46,9 @@
 </script>
 
 <style lang="sass">
+*, html
+  padding: 0
+  margin: 0
 #app
   font-family: Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
@@ -76,4 +92,30 @@ form
         // TODO color
         color: #000
         background: #ccc
+a
+  color: #000000
+  text-decoration: none
+  border-bottom: 2px solid transparent
+  transition: all 150ms ease-in-out
+  &:hover
+    border-color: #250856
+.container
+  margin: 2rem
+header
+  text-align: center
+  margin: 0 0 2rem 0
+  h1
+    font-size: 1.25rem
+    margin: 0 0 .5rem 0
+  nav
+    ul
+      list-style: none
+      margin: 0
+      padding: 0
+      li
+        margin: 0 0 .25rem 0
+main
+  margin: 0 0 2rem 0
+footer
+  text-align: center
 </style>
