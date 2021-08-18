@@ -6,10 +6,7 @@
         v-for="entry in log.log_entries"
         :key="entry.id"
       >
-        {{entry.title}}
-        <keep-alive>
-          <component :is="selectComponent(entry.type)" />
-        </keep-alive>
+        <component :is="currentComponent(entry.type)" :entry="entry" />
       </li>
     </ul>
     <div v-else>
@@ -20,13 +17,13 @@
 
 <script setup>
 import { useMainStore } from '@/store'
-import {computed, defineAsyncComponent, onBeforeMount, ref} from 'vue'
+import { defineAsyncComponent, onBeforeMount, ref} from 'vue'
 import { useRoute } from 'vue-router'
 
 const store = useMainStore()
 
 const route = useRoute()
-const id = route.params.id
+const {id} = route.params
 
 const log = ref(null)
 
@@ -37,8 +34,7 @@ onBeforeMount(async () => {
 
 const types = store.types
 
-function selectComponent (type) {
-  // TODO default should also be reflected in the dropdown
+function currentComponent (type) {
   switch (type) {
     case types.IMAGE.id:
       return defineAsyncComponent(() => import('@/components/LogsDetails/LogsDetailsEntryImage.vue'))
@@ -52,7 +48,6 @@ function selectComponent (type) {
       return defineAsyncComponent(() => import('@/components/LogsDetails/LogsDetailsEntryMarkdown.vue'))
   }
 }
-
 </script>
 
 <style lang="sass" scoped>
