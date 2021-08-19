@@ -1,12 +1,12 @@
 <template>
-  <div class="wrapper">
+  <section class="wrapper">
     <h3 class="title" v-if="title">{{ title }}</h3>
     <div class="meta">
       <div class="location" v-if="location">{{ location }}</div>
       <time class="chronological" v-if="chronological">{{ chronologicalFormatted }}</time>
     </div>
     <slot />
-  </div>
+  </section>
 </template>
 
 <script setup>

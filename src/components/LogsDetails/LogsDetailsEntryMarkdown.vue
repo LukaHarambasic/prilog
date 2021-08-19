@@ -1,6 +1,7 @@
 <template>
   <logs-details-entry-wrapper :title="title" :location="location" :chronological="chronological">
     <div class="markdown">
+<!--      TODO security issue-->
       <div v-html="html" />
     </div>
   </logs-details-entry-wrapper>

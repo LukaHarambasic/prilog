@@ -1,5 +1,4 @@
 <template>
-  <section>
     <header class="header">
       <h1 class="title" v-if="log">{{ log.title }}</h1>
       <p class="description" v-if="log">{{log.description}}</p>
@@ -16,7 +15,6 @@
     <div v-else>
       No log found O.o
     </div>
-  </section>
 </template>
 
 <script setup>

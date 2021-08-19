@@ -44,7 +44,7 @@
       </div>
     </form>
     <keep-alive>
-      <component :is="selectedComponent" />
+      <component :is="selectedComponent" :logId="selectedLogId"/>
     </keep-alive>
   </section>
 </template>
@@ -75,6 +75,7 @@ const selectedComponent = computed(() => {
 
 // Logs
 // TODO should go in store
+// TODO should be set initially for the dropdown with the log was updated the last time
 const selectedLogId = ref('')
 const logs = ref([])
 // TODO should happen in store

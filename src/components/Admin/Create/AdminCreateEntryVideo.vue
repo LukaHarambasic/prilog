@@ -20,15 +20,17 @@
           name="chronological"
         >
       </div>
-      <div class="field">
+      <div class="field" v-show="!uploading">
         <label for="video">What video do you want to share?</label>
         <input
           id="video"
           name="video"
           type="file"
+          @change="onUpload($event)"
           accept="video/*"
         >
       </div>
+      <div class="field" v-show="uploading">Uploading...</div>
       <div class="field">
         <input
           :disabled="!isValid"
@@ -43,7 +45,10 @@
 
 <script setup>
 import { ref, defineProps, toRefs, computed } from 'vue'
+import { useMainStore } from '@/store'
 import { sb } from '@/assets/js/supabase'
+
+const store = useMainStore()
 
 // Props
 const props = defineProps({
@@ -58,19 +63,48 @@ const { logId } = toRefs(props)
 const title = ref('')
 const chronological = ref('')
 
-// Form: Create new log entry
+const uploading = ref(false)
+const path = ref(null)
+
+// Form: Upload video
+async function onUpload (evt) {
+  // TODO action in store
+  // TODO make reusable for image
+  try {
+    uploading.value = true
+    const file = evt.target.files[0]
+    if (!file) {
+      throw new Error("You must select an image to upload.")
+    }
+    const fileName = file.name.split(".")[0].replace(' ', '').toLowerCase()
+    const fileExt = file.name.split(".")[1]
+    const filePath = `${fileName}-${Date.now()}.${fileExt}`
+    let { data, error: uploadError } = await sb.storage
+        .from('media')
+        .upload(filePath, file)
+    if (uploadError) throw uploadError
+    path.value = data.Key
+  } catch (error) {
+    // TODO show error message
+    console.error(error.message)
+  } finally {
+    uploading.value = false
+  }
+}
+
 async function onCreate () {
-  // store
+  // todo store
   const { data, error } = await sb
-    .from('log_entries')
-    .insert([
-      {
-        type: 3,
-        title: title.value,
-        chronological: chronological.value,
-        logs_id: logId.value
-      }
-    ])
+      .from('log_entries')
+      .insert([
+        {
+          type: store.types.VIDEO.id,
+          title: title.value,
+          chronological: chronological.value,
+          file_path: path.value,
+          logs_id: logId.value
+        }
+      ])
   if (error) {
     console.log('ERROR')
     console.log(error)
@@ -80,8 +114,7 @@ async function onCreate () {
 }
 
 // Form: Validation
-console.log(logId.value)
-const isValid = computed(() => !!logId.value && !!title.value && !!markdown.value && !!chronological.value)
+const isValid = computed(() => !!logId.value && !!title.value && !!chronological.value && !!path.value)
 
 </script>
 

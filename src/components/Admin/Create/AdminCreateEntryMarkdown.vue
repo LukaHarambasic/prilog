@@ -42,7 +42,10 @@
 
 <script setup>
 import { ref, defineProps, toRefs, computed } from 'vue'
+import { useMainStore } from '@/store'
 import { sb } from '@/assets/js/supabase'
+
+const store = useMainStore()
 
 // Props
 const props = defineProps({
@@ -65,7 +68,7 @@ async function onCreate () {
     .from('log_entries')
     .insert([
       {
-        type: 3,
+        type: store.types.MARKDOWN.id,
         title: title.value,
         markdown: markdown.value,
         chronological: chronological.value,
