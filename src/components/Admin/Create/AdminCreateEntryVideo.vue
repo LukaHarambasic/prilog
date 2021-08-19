@@ -83,7 +83,12 @@ async function onUpload (evt) {
         .from('media')
         .upload(filePath, file)
     if (uploadError) throw uploadError
-    path.value = data.Key
+    const key = data.Key
+    const { publicURL, error: publicUrlError } = sb
+        .storage
+        .from('public-bucket')
+        .getPublicUrl(key)
+    path.value = publicURL
   } catch (error) {
     // TODO show error message
     console.error(error.message)
