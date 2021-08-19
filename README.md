@@ -5,9 +5,9 @@ Log your life and share it with everybody, even your grandparents. It combines T
 ## Features
 
 - [ ] Different media types
-    - [ ] Image
+    - [x] Image
     - [ ] Video
-    - [ ] Markdown
+    - [x] Markdown
     - [ ] Location
 - [ ] Changes via
     - [ ] RSS
