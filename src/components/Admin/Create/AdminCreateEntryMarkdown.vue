@@ -12,6 +12,15 @@
         >
       </div>
       <div class="field">
+        <label for="location">Where did this happen?</label>
+        <input
+            id="location"
+            v-model="location"
+            type="text"
+            name="location"
+        >
+      </div>
+      <div class="field">
         <label for="chronological">When did this happen?</label>
         <input
           id="chronological"
@@ -58,8 +67,9 @@ const { logId } = toRefs(props)
 
 // Form: Fields
 const title = ref('')
-const markdown = ref('')
+const location = ref('')
 const chronological = ref('')
+const markdown = ref('')
 
 // Form: Create new log entry
 async function onCreate () {
@@ -70,8 +80,9 @@ async function onCreate () {
       {
         type: store.types.MARKDOWN.id,
         title: title.value,
-        markdown: markdown.value,
+        location: location.value,
         chronological: chronological.value,
+        markdown: markdown.value,
         logs_id: logId.value
       }
     ])
@@ -84,7 +95,7 @@ async function onCreate () {
 }
 
 // Form: Validation
-const isValid = computed(() => !!logId.value && !!title.value && !!markdown.value && !!chronological.value)
+const isValid = computed(() => !!logId.value && !!title.value && !!location.value && !!chronological.value && !!markdown.value)
 
 </script>
 

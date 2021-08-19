@@ -1,5 +1,5 @@
 <template>
-  <logs-details-entry-wrapper :title="title" :location="location" :chronological="chronological">
+  <LogsDetailsEntryVideo :title="title" :location="location" :chronological="chronological">
     <div class="video">
       <video width="320" height="240" controls>
         <source src="movie.mp4" type="video/mp4">
@@ -7,10 +7,13 @@
         Your browser does not support the video tag.
       </video>
     </div>
-  </logs-details-entry-wrapper>
+  </LogsDetailsEntryVideo>
 </template>
 
 <script setup>
+import { ref, defineProps, toRefs } from 'vue'
+import LogsDetailsEntryWrapper from '@/components/LogsDetails/LogsDetailsEntryWrapper.vue'
+
 // make the props reusable
 // Props
 const props = defineProps({

@@ -1,5 +1,5 @@
 <template>
-    <header class="header">
+    <header v-if="log" class="header">
       <h1 class="title" v-if="log">{{ log.title }}</h1>
       <p class="description" v-if="log">{{log.description}}</p>
     </header>
@@ -37,7 +37,7 @@ onBeforeMount(async () => {
 const types = store.types
 
 function currentComponent (type) {
-  switch (type) {
+  switch (parseInt(type)) {
     case types.IMAGE.id:
       return defineAsyncComponent(() => import('@/components/LogsDetails/LogsDetailsEntryImage.vue'))
     case types.LOCATION.id:

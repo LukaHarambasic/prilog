@@ -41,6 +41,11 @@ import { computed, ref } from 'vue'
 const title = ref('')
 const description = ref('')
 
+function getRandomColor() {
+  // https://dev.to/akhil_001/generating-random-color-with-single-line-of-js-code-fhj
+  return '#' + Math.floor(Math.random()*16777215).toString(16)
+}
+
 async function onCreate () {
   // store
   const { data, error } = await sb
@@ -48,7 +53,8 @@ async function onCreate () {
     .insert([
       {
         title: title.value,
-        description: description.value
+        description: description.value,
+        color: getRandomColor()
       }
     ])
   if (error) {

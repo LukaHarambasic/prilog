@@ -12,12 +12,21 @@
         >
       </div>
       <div class="field">
+        <label for="location">Where did this happen?</label>
+        <input
+            id="location"
+            v-model="location"
+            type="text"
+            name="location"
+        >
+      </div>
+      <div class="field">
         <label for="chronological">When did this happen?</label>
         <input
-          id="chronological"
-          v-model="chronological"
-          type="datetime-local"
-          name="chronological"
+            id="chronological"
+            v-model="chronological"
+            type="datetime-local"
+            name="chronological"
         >
       </div>
       <div class="field" v-show="!uploading">
@@ -30,6 +39,7 @@
           accept="video/*"
         >
       </div>
+      <!-- TODO should be an overlay to avoid jumping -->
       <div class="field" v-show="uploading">Uploading...</div>
       <div class="field">
         <input
@@ -61,6 +71,7 @@ const { logId } = toRefs(props)
 
 // Form: Fields
 const title = ref('')
+const location = ref('')
 const chronological = ref('')
 
 const uploading = ref(false)
@@ -105,6 +116,7 @@ async function onCreate () {
         {
           type: store.types.VIDEO.id,
           title: title.value,
+          location: location.value,
           chronological: chronological.value,
           file_path: path.value,
           logs_id: logId.value
@@ -119,7 +131,7 @@ async function onCreate () {
 }
 
 // Form: Validation
-const isValid = computed(() => !!logId.value && !!title.value && !!chronological.value && !!path.value)
+const isValid = computed(() => !!logId.value && !!title.value && !!location.value && !!chronological.value && !!path.value)
 
 </script>
 
