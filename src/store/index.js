@@ -7,11 +7,11 @@ export const useMainStore = defineStore('main', {
     logs: [],
     entryTypes: ENTRY_TYPES,
     messageTypes: MESSAGE_TYPES,
-    messages: [],
+    messages: []
   }),
   getters: {
-    logById(state) {
-      if(state.logs === []) return {}
+    logById (state) {
+      if (state.logs === []) return {}
       return state.logs.find(log => log.id === '19a226b2-4754-4d4c-bf8c-a7d867e82245')
     }
   },
@@ -31,7 +31,7 @@ export const useMainStore = defineStore('main', {
         this.logs = data
       }
     },
-    sendMessage(title, description, type) {
+    sendMessage (title, description, type) {
       const id = Date.now().toString() + (Math.floor(Math.random() * 100)).toString()
       this.messages.push({
         id,
@@ -44,7 +44,7 @@ export const useMainStore = defineStore('main', {
         this.messages.splice(index, 1)
       }, 5000)
     },
-    removeMessage(id) {
+    removeMessage (id) {
       const index = this.messages.findIndex(message => message.id === id)
       this.messages.splice(index, 1)
     }

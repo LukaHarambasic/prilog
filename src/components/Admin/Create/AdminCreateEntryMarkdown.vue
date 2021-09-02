@@ -14,10 +14,10 @@
       <div class="field">
         <label for="location">Where did this happen?</label>
         <input
-            id="location"
-            v-model="location"
-            type="text"
-            name="location"
+          id="location"
+          v-model="location"
+          type="text"
+          name="location"
         >
       </div>
       <div class="field">

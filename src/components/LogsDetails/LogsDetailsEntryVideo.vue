@@ -1,10 +1,18 @@
 <template>
-  <LogsDetailsEntryWrapper :title="title" :location="location" :chronological="chronological">
+  <LogsDetailsEntryWrapper
+    :title="title"
+    :location="location"
+    :chronological="chronological"
+  >
     <div class="video">
-      <video width="320" height="240" controls>
-        <source src="movie.mp4" type="video/mp4">
-        <source src="movie.ogg" type="video/ogg">
-        Your browser does not support the video tag.
+      <video
+        width="400"
+        controls
+      >
+        <source
+          :src="video"
+          type="video/mp4"
+        >
       </video>
     </div>
   </LogsDetailsEntryWrapper>
@@ -22,10 +30,11 @@ const props = defineProps({
     required: true
   }
 })
-const { entry: {value} } = toRefs(props)
+const { entry: { value } } = toRefs(props)
 const title = ref(value.title)
 const location = ref(value.location)
 const chronological = ref(value.chronological)
+const video = ref(value.file_path)
 </script>
 
 <style lang="sass" scoped>

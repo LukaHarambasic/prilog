@@ -1,7 +1,11 @@
 <template>
-  <LogsDetailsEntryWrapper :title="title" :location="location" :chronological="chronological">
+  <LogsDetailsEntryWrapper
+    :title="title"
+    :location="location"
+    :chronological="chronological"
+  >
     <div class="markdown">
-<!--      TODO security issue-->
+      <!--      TODO security issue-->
       <div v-html="html" />
     </div>
   </LogsDetailsEntryWrapper>
@@ -19,7 +23,7 @@ const props = defineProps({
     required: true
   }
 })
-const { entry: {value} } = toRefs(props)
+const { entry: { value } } = toRefs(props)
 
 const title = ref(value.title)
 const location = ref(value.location)

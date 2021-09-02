@@ -44,14 +44,14 @@ const store = useMainStore()
 const title = ref('')
 const description = ref('')
 
-function getRandomColor() {
+function getRandomColor () {
   // https://dev.to/akhil_001/generating-random-color-with-single-line-of-js-code-fhj
-  return '#' + Math.floor(Math.random()*16777215).toString(16)
+  return '#' + Math.floor(Math.random() * 16777215).toString(16)
 }
 
 async function onCreate () {
   // store
-  const { data, error } = await sb
+  const { error } = await sb
     .from('logs')
     .insert([
       {
@@ -65,7 +65,7 @@ async function onCreate () {
     console.log(error)
   } else {
     store.sendMessage(
-        'New Log created!',
+      'New Log created!',
         `Congratulations you created the log "${title.value}". Have fun!`,
         store.messageTypes.SUCCESS.id
     )

@@ -1,31 +1,50 @@
 <template>
-    <header v-if="log" class="header">
-      <h1 class="title" v-if="log">{{ log.title }}</h1>
-      <p class="description" v-if="log">{{log.description}}</p>
-    </header>
-    <ul class="log" v-if="log">
-      <li
-        v-for="entry in log.log_entries"
-        :key="entry.id"
-        class="entry"
-      >
-        <component :is="currentComponent(entry.type)" :entry="entry" />
-      </li>
-    </ul>
-    <div v-else>
-      No log found O.o
-    </div>
+  <header
+    v-if="log"
+    class="header"
+  >
+    <h1
+      v-if="log"
+      class="title"
+    >
+      {{ log.title }}
+    </h1>
+    <p
+      v-if="log"
+      class="description"
+    >
+      {{ log.description }}
+    </p>
+  </header>
+  <ul
+    v-if="log"
+    class="log"
+  >
+    <li
+      v-for="entry in log.log_entries"
+      :key="entry.id"
+      class="entry"
+    >
+      <component
+        :is="currentComponent(entry.type)"
+        :entry="entry"
+      />
+    </li>
+  </ul>
+  <div v-else>
+    No log found O.o
+  </div>
 </template>
 
 <script setup>
 import { useMainStore } from '@/store'
-import { defineAsyncComponent, onBeforeMount, ref} from 'vue'
+import { defineAsyncComponent, onBeforeMount, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
 const store = useMainStore()
 
 const route = useRoute()
-const {id} = route.params
+const { id } = route.params
 
 const log = ref(null)
 

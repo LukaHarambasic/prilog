@@ -1,13 +1,23 @@
 <template>
   <section>
-    <ul class="logs" v-if="store.logs">
+    <ul
+      v-if="store.logs"
+      class="logs"
+    >
       <li
         v-for="log in store.logs"
         :key="log.id"
       >
-        <router-link class="log" :to="`/logs/${log.id}`">
-          <div class="title">{{ log.title }}</div>
-          <p class="description">{{ log.description }}</p>
+        <router-link
+          class="log"
+          :to="`/logs/${log.id}`"
+        >
+          <div class="title">
+            {{ log.title }}
+          </div>
+          <p class="description">
+            {{ log.description }}
+          </p>
         </router-link>
       </li>
     </ul>

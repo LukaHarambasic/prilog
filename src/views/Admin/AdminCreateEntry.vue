@@ -44,7 +44,10 @@
       </div>
     </form>
     <keep-alive>
-      <component :is="selectedComponent" :logId="selectedLogId"/>
+      <component
+        :is="selectedComponent"
+        :log-id="selectedLogId"
+      />
     </keep-alive>
   </section>
 </template>

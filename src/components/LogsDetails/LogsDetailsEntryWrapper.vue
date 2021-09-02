@@ -1,18 +1,30 @@
 <template>
   <section class="wrapper">
-    <h3 class="title" v-if="title">{{ title }}</h3>
+    <h3
+      v-if="title"
+      class="title"
+    >
+      {{ title }}
+    </h3>
     <div class="meta">
-      <div class="location" v-if="location">{{ location }}</div>
-      <time class="chronological" v-if="chronological">{{ chronologicalFormatted }}</time>
+      <div
+        v-if="location"
+        class="location"
+      >
+        {{ location }}
+      </div>
+      <time
+        v-if="chronological"
+        class="chronological"
+      >{{ chronologicalFormatted }}</time>
     </div>
     <slot />
   </section>
 </template>
 
 <script setup>
-import { format, formatRelative, differenceInDays } from 'date-fns'
-import { computed } from 'vue'
-import { defineProps, toRefs } from 'vue'
+import { formatRelative } from 'date-fns'
+import { computed, defineProps, toRefs } from 'vue'
 
 // Props
 const props = defineProps({
@@ -39,8 +51,8 @@ const chronologicalFormatted = computed(() => {
   //   return format(entryDate, 'dd.MM.yyyy')
   // }
   return formatRelative(
-      entryDate,
-      nowDate,
+    entryDate,
+    nowDate
   )
 })
 </script>
