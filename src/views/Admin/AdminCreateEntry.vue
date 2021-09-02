@@ -65,7 +65,6 @@ const store = useMainStore()
 
 // Types
 const selectedType = ref('')
-const typeComponent = ref(null)
 const selectedComponent = computed(() => {
   // TODO default should also be reflected in the dropdown
   switch (selectedType.value) {
