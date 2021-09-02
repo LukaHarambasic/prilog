@@ -6,12 +6,11 @@
   >
     <div class="video">
       <video
-        width="400"
         controls
       >
         <source
           :src="video"
-          type="video/mp4"
+          :type="type"
         >
       </video>
     </div>
@@ -30,13 +29,18 @@ const props = defineProps({
     required: true
   }
 })
-const { entry: { value } } = toRefs(props)
-const title = ref(value.title)
-const location = ref(value.location)
-const chronological = ref(value.chronological)
-const video = ref(value.file_path)
+const { entry } = toRefs(props)
+const title = ref(entry.value.title)
+const location = ref(entry.value.location)
+const chronological = ref(entry.value.chronological)
+const video = ref(entry.value.file_path)
+const type = ref(entry.value.file_type)
+
+console.log(type.value)
 </script>
 
 <style lang="sass" scoped>
-
+video
+  width: 100%
+  max-height: 100%
 </style>

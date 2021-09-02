@@ -83,7 +83,8 @@ const location = ref('')
 const chronological = ref('')
 
 const uploading = ref(false)
-const path = ref(null)
+const filePath = ref(null)
+const fileType = ref(null)
 
 // Form: Upload video
 async function onUpload (evt) {
@@ -98,16 +99,15 @@ async function onUpload (evt) {
     const fileName = file.name.split('.')[0].replace(' ', '').toLowerCase()
     const fileExt = file.name.split('.')[1]
     const filePath = `${fileName}-${Date.now()}.${fileExt}`
+    fileType.value = file.type
     const { data, error: uploadError } = await sb.storage
       .from('media')
       .upload(filePath, file)
     if (uploadError) throw uploadError
     const key = data.Key
-    console.log(key)
-    // https://gkjykehhfdcaojaumiru.supabase.in/storage/v1/object/public/media/demo-1630574594757.mov
+    // getPublicUrl() is somehow not working for me, see https://github.com/supabase/supabase/issues/2908#issuecomment-911449014
     const baseURL = import.meta.env.VITE_SUPABASE_URL.toString().replace('.co', '.in')
-    path.value = `${baseURL}/storage/v1/object/public/${key}`
-    console.log(path.value)
+    filePath.value = `${baseURL}/storage/v1/object/public/${key}`
   } catch (error) {
     // TODO show error message
     console.error(error.message)
@@ -126,15 +126,29 @@ async function onCreate () {
         title: title.value,
         location: location.value,
         chronological: chronological.value,
-        file_path: path.value,
+        file_path: filePath.value,
+        file_type: fileType.value,
         logs_id: logId.value
       }
     ])
   if (error) {
-    console.log('ERROR')
-    console.log(error)
+    console.error(error)
+    store.sendMessage(
+        'Ups! Something went wrong :(',
+        `Please try it again.`,
+        store.messageTypes.DANGER.id
+    )
   } else {
-    console.log(data)
+    store.sendMessage(
+        'New Entry created!',
+        `Congratulations you created the entry "${title.value}".`,
+        store.messageTypes.SUCCESS.id
+    )
+    title.value = ''
+    location.value = ''
+    chronological.value = ''
+    path.value = ''
+    fileType.value = ''
   }
 }
 
