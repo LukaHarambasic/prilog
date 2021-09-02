@@ -60,7 +60,7 @@ function currentComponent (type) {
     case store.entryTypes.LOCATION.id:
       return defineAsyncComponent(() => import('@/components/LogsDetails/LogsDetailsEntryLocation.vue'))
     case store.entryTypes.MARKDOWN.id:
-      return defineAsyncComponent(() => import('@/components/LogsDetails/LogsDetailsEntryMarkdown.vue'))
+      return defineAsyncComponent(() => import('@/components/LogsDetails/LogsDetailsEntryLocation.vue'))
     case store.entryTypes.VIDEO.id:
       return defineAsyncComponent(() => import('@/components/LogsDetails/LogsDetailsEntryVideo.vue'))
     default:

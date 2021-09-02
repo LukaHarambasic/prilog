@@ -34,5 +34,4 @@ const alt = ref(entry.value.file_alt)
 </script>
 
 <style lang="sass" scoped>
-
 </style>

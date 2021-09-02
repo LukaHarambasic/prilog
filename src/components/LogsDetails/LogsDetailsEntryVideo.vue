@@ -33,7 +33,7 @@ const title = ref(entry.value.title)
 const location = ref(entry.value.location)
 const chronological = ref(entry.value.chronological)
 const video = ref(entry.value.file_path)
-const type = ref(entry.value.file_type)
+// const type = ref(entry.value.file_type)
 </script>
 
 <style lang="sass" scoped>

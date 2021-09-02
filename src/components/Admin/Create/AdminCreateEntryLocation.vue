@@ -21,7 +21,16 @@
         >
       </div>
       <div class="field">
-        Location Search from Here, Google or Open Street Maps. Or something new.
+        <label for="location">Give me a location!</label>
+        <input
+          id="location"
+          v-model.lazy="locationSearch"
+          type="text"
+          name="location"
+        >
+      </div>
+      <div class="field">
+        {{ locationResult.display_name }}
       </div>
       <div class="field">
         <input
@@ -36,8 +45,9 @@
 </template>
 
 <script setup>
-import { ref, defineProps, toRefs, computed } from 'vue'
+import { ref, defineProps, toRefs, computed, watch } from 'vue'
 import { sb } from '@/assets/js/supabase'
+import axios from 'axios'
 
 // Props
 const props = defineProps({
@@ -50,8 +60,17 @@ const { logId } = toRefs(props)
 
 // Form: Fields
 const title = ref('')
-const markdown = ref('')
 const chronological = ref('')
+const locationSearch = ref('')
+const locationResult = ref('')
+const coordinates = ref({ lng: 0, lat: 0 })
+
+watch(locationSearch, async (location, _) => {
+  if (locationSearch.value.length < 2) return
+  const { data } = await axios.get(`https://nominatim.openstreetmap.org/search?q=${locationSearch.value}&format=json`)
+  locationResult.value = data.reduce((prev, current) => (prev.importance > current.importance) ? prev : current)
+  coordinates.value = { longitude: locationResult.value.lon, latitude: locationResult.value.lat }
+})
 
 // Form: Create new log entry
 async function onCreate () {
@@ -62,11 +81,12 @@ async function onCreate () {
       {
         type: 3,
         title: title.value,
-        markdown: markdown.value,
         chronological: chronological.value,
+        coordinates: coordinates.value,
         logs_id: logId.value
       }
     ])
+  // TODO messages
   if (error) {
     console.log('ERROR')
     console.log(error)
@@ -76,8 +96,7 @@ async function onCreate () {
 }
 
 // Form: Validation
-console.log(logId.value)
-const isValid = computed(() => !!logId.value && !!title.value && !!markdown.value && !!chronological.value)
+const isValid = computed(() => !!logId.value && !!title.value && !!chronological.value && !!coordinates.value.latitude && !!coordinates.value.longitude)
 
 </script>
 

@@ -119,9 +119,9 @@ async function onUpload (evt) {
   } catch (error) {
     console.error(error.message)
     store.sendMessage(
-        'Ups! Something went wrong :(',
-        'We couldn\'t upload your video, please try again.',
-        store.messageTypes.DANGER.id
+      'Ups! Something went wrong :(',
+      'We couldn\'t upload your video, please try again.',
+      store.messageTypes.DANGER.id
     )
   } finally {
     uploading.value = false
@@ -130,7 +130,7 @@ async function onUpload (evt) {
 
 async function onCreate () {
   // todo store
-  const { data, error } = await sb
+  const { error } = await sb
     .from('log_entries')
     .insert([
       {
@@ -146,13 +146,13 @@ async function onCreate () {
   if (error) {
     console.error(error)
     store.sendMessage(
-        'Ups! Something went wrong :(',
-        'Please try it again.',
-        store.messageTypes.DANGER.id
+      'Ups! Something went wrong :(',
+      'Please try it again.',
+      store.messageTypes.DANGER.id
     )
   } else {
     store.sendMessage(
-        'New Entry created!',
+      'New Entry created!',
         `Congratulations you created the image entry "${title.value}".`,
         store.messageTypes.SUCCESS.id
     )
