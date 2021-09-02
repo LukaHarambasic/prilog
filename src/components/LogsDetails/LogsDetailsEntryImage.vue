@@ -1,9 +1,9 @@
 <template>
-  <LogsDetailsEntryVideo :title="title" :location="location" :chronological="chronological">
+  <LogsDetailsEntryWrapper :title="title" :location="location" :chronological="chronological">
     <div class="image">
       <img :alt="alt" :src="src" />
     </div>
-  </LogsDetailsEntryVideo>
+  </LogsDetailsEntryWrapper>
 </template>
 
 <script setup>

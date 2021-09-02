@@ -1,10 +1,10 @@
 <template>
-  <LogsDetailsEntryVideo :title="title" :location="location" :chronological="chronological">
+  <LogsDetailsEntryWrapper :title="title" :location="location" :chronological="chronological">
     <div class="markdown">
 <!--      TODO security issue-->
       <div v-html="html" />
     </div>
-  </LogsDetailsEntryVideo>
+  </LogsDetailsEntryWrapper>
 </template>
 
 <script setup>

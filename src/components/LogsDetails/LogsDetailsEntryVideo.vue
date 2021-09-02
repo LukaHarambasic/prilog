@@ -1,5 +1,5 @@
 <template>
-  <LogsDetailsEntryVideo :title="title" :location="location" :chronological="chronological">
+  <LogsDetailsEntryWrapper :title="title" :location="location" :chronological="chronological">
     <div class="video">
       <video width="320" height="240" controls>
         <source src="movie.mp4" type="video/mp4">
@@ -7,7 +7,7 @@
         Your browser does not support the video tag.
       </video>
     </div>
-  </LogsDetailsEntryVideo>
+  </LogsDetailsEntryWrapper>
 </template>
 
 <script setup>
@@ -23,7 +23,6 @@ const props = defineProps({
   }
 })
 const { entry: {value} } = toRefs(props)
-
 const title = ref(value.title)
 const location = ref(value.location)
 const chronological = ref(value.chronological)
