@@ -10,7 +10,6 @@
       >
         <source
           :src="video"
-          :type="type"
         >
       </video>
     </div>

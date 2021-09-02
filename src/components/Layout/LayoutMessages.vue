@@ -4,6 +4,7 @@
       <li
         v-for="message in store.messages"
         :key="message.id"
+        :data-type="message.type"
         class="message"
       >
         <button
@@ -42,7 +43,8 @@ const store = useMainStore()
 
 <style lang="sass" scoped>
 .messages
-  margin: 0 1rem 1rem 0
+  margin: 1rem
+  max-width: calc(100% - 2rem)
   list-style: none
   padding: 0
   .message
@@ -53,9 +55,27 @@ const store = useMainStore()
     align-items: flex-start
     padding: .5rem .5rem 1rem 1rem
     margin: 0 0 1rem 0
-    background: #250856
     border-radius: .25rem
-    color: #ffffff
+    &[data-type="1"]
+      color: black
+      background: green
+      svg
+        fill: black
+    &[data-type="2"]
+      color: black
+      background: yellow
+      svg
+        fill: black
+    &[data-type="3"]
+      color: black
+      background: red
+      svg
+        fill: black
+    &[data-type="$"]
+      color: black
+      background: blue
+      svg
+        fill: black
     .remove
       align-self: flex-end
       margin: 0 0 .5rem 0
@@ -68,7 +88,6 @@ const store = useMainStore()
       svg
         width: 2rem
         height: 2rem
-        fill: #ffffff
     .title
       font-weight: bold
       margin: 0 0 .5rem 0

@@ -7,7 +7,12 @@ export const useMainStore = defineStore('main', {
     logs: [],
     entryTypes: ENTRY_TYPES,
     messageTypes: MESSAGE_TYPES,
-    messages: []
+    messages: [{
+      id: 2,
+      title: 'message',
+      description: 'lorem ipsum',
+      type: 2
+    }]
   }),
   getters: {
     logById (state) {
