@@ -39,7 +39,7 @@ const chronological = ref(value.chronological)
 const coordinates = ref(value.coordinates)
 
 onMounted(() => {
-  if(coordinates.value === null) return
+  if (coordinates.value === null) return
   const longitude = parseFloat(coordinates.value.longitude)
   const latitude = parseFloat(coordinates.value.latitude)
   const map = new Map({

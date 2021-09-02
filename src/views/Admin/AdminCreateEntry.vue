@@ -53,27 +53,32 @@
 </template>
 
 <script setup>
-import { computed, defineAsyncComponent, onMounted, ref } from 'vue'
+import { computed, markRaw, onMounted, ref } from 'vue'
 import { sb } from '@/assets/js/supabase'
 import { useMainStore } from '@/store'
+import AdminCreateEntryImage from '@/components/Admin/Create/AdminCreateEntryImage.vue'
+import AdminCreateEntryLocation from '@/components/Admin/Create/AdminCreateEntryLocation.vue'
+import AdminCreateEntryMarkdown from '@/components/Admin/Create/AdminCreateEntryMarkdown.vue'
+import AdminCreateEntryVideo from '@/components/Admin/Create/AdminCreateEntryVideo.vue'
 
 const store = useMainStore()
 
 // Types
 const selectedType = ref('')
+const typeComponent = ref(null)
 const selectedComponent = computed(() => {
   // TODO default should also be reflected in the dropdown
   switch (selectedType.value) {
     case store.entryTypes.IMAGE.id:
-      return defineAsyncComponent(() => import('@/components/Admin/Create/AdminCreateEntryImage.vue'))
+      return markRaw(AdminCreateEntryImage)
     case store.entryTypes.LOCATION.id:
-      return defineAsyncComponent(() => import('@/components/Admin/Create/AdminCreateEntryLocation.vue'))
+      return markRaw(AdminCreateEntryLocation)
     case store.entryTypes.MARKDOWN.id:
-      return defineAsyncComponent(() => import('@/components/Admin/Create/AdminCreateEntryMarkdown.vue'))
+      return markRaw(AdminCreateEntryMarkdown)
     case store.entryTypes.VIDEO.id:
-      return defineAsyncComponent(() => import('@/components/Admin/Create/AdminCreateEntryVideo.vue'))
+      return markRaw(AdminCreateEntryVideo)
     default:
-      return defineAsyncComponent(() => import('@/components/Admin/Create/AdminCreateEntryMarkdown.vue'))
+      return markRaw(AdminCreateEntryMarkdown)
   }
 })
 
