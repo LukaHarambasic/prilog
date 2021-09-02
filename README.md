@@ -5,9 +5,9 @@ Log your life and share it with everybody, even your grandparents. It combines T
 ## Features
 
 - [ ] Different media types
-    - [ ] Image
+    - [x] Image
     - [ ] Video
-    - [ ] Markdown
+    - [x] Markdown
     - [ ] Location
 - [ ] Changes via
     - [ ] RSS
@@ -21,7 +21,8 @@ Log your life and share it with everybody, even your grandparents. It combines T
     - [ ] Dropbox
     - [ ] OneDrive
 - [ ] Public / Private Logs
-    - [ ] Allowlisted phone numbers with OTP
+    - [ ] ~~Allowlisted phone numbers with OTP~~ -> to expensive: https://supabase.io/blog/2021/07/28/supabase-auth-passwordless-sms-login & https://www.twilio.com/de/sms/pricing/de
+    - [ ] ~~Allowlist email adresses for all available providers~~ -> ok maybe everything will always be public
 
 ## Architecture
 
