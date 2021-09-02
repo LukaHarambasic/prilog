@@ -94,6 +94,8 @@ a
   transition: all 150ms ease-in-out
   &:hover
     border-color: #250856
+img
+  max-width: 100%
 .container
   margin: 2rem
 header

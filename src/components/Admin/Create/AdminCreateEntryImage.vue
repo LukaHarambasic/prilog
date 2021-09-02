@@ -93,7 +93,7 @@ const chronological = ref('')
 const alt = ref('')
 
 const uploading = ref(false)
-const path = ref(null)
+const filePath = ref(null)
 
 // Form: Upload image
 async function onUpload (evt) {
@@ -107,21 +107,22 @@ async function onUpload (evt) {
     }
     const fileName = file.name.split('.')[0].replace(' ', '').toLowerCase()
     const fileExt = file.name.split('.')[1]
-    const filePath = `${fileName}-${Date.now()}.${fileExt}`
+    const filePathUnique = `${fileName}-${Date.now()}.${fileExt}`
     const { data, error: uploadError } = await sb.storage
       .from('media')
-      .upload(filePath, file)
+      .upload(filePathUnique, file)
     if (uploadError) throw uploadError
     const key = data.Key
-    // { publicURL, error: publicUrlError }
-    const { publicURL } = sb
-      .storage
-      .from('public-bucket')
-      .getPublicUrl(key)
-    path.value = publicURL
+    // getPublicUrl() is somehow not working for me, see https://github.com/supabase/supabase/issues/2908#issuecomment-911449014
+    const baseURL = import.meta.env.VITE_SUPABASE_URL.toString().replace('.co', '.in')
+    filePath.value = `${baseURL}/storage/v1/object/public/${key}`
   } catch (error) {
-    // TODO show error message
     console.error(error.message)
+    store.sendMessage(
+        'Ups! Something went wrong :(',
+        'We couldn\'t upload your video, please try again.',
+        store.messageTypes.DANGER.id
+    )
   } finally {
     uploading.value = false
   }
@@ -137,21 +138,34 @@ async function onCreate () {
         title: title.value,
         location: location.value,
         chronological: chronological.value,
-        file_path: path.value,
+        file_path: filePath.value,
         file_alt: alt.value,
         logs_id: logId.value
       }
     ])
   if (error) {
-    console.log('ERROR')
-    console.log(error)
+    console.error(error)
+    store.sendMessage(
+        'Ups! Something went wrong :(',
+        'Please try it again.',
+        store.messageTypes.DANGER.id
+    )
   } else {
-    console.log(data)
+    store.sendMessage(
+        'New Entry created!',
+        `Congratulations you created the image entry "${title.value}".`,
+        store.messageTypes.SUCCESS.id
+    )
+    title.value = ''
+    location.value = ''
+    chronological.value = ''
+    filePath.value = ''
+    alt.value = ''
   }
 }
 
 // Form: Validation
-const isValid = computed(() => !!logId.value && !!title.value && !!location.value && !!chronological.value && !!path.value)
+const isValid = computed(() => !!logId.value && !!title.value && !!location.value && !!chronological.value && !!filePath.value)
 
 </script>
 

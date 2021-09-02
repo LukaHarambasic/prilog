@@ -44,6 +44,7 @@ const store = useMainStore()
 <style lang="sass" scoped>
 .messages
   margin: 1rem
+  min-width: 10rem
   max-width: calc(100% - 2rem)
   list-style: none
   padding: 0

@@ -87,10 +87,22 @@ async function onCreate () {
       }
     ])
   if (error) {
-    console.log('ERROR')
-    console.log(error)
+    console.error(error)
+    store.sendMessage(
+        'Ups! Something went wrong :(',
+        'Please try it again.',
+        store.messageTypes.DANGER.id
+    )
   } else {
-    console.log(data)
+    store.sendMessage(
+        'New Entry created!',
+        `Congratulations you created the text entry "${title.value}".`,
+        store.messageTypes.SUCCESS.id
+    )
+    title.value = ''
+    location.value = ''
+    chronological.value = ''
+    markdown.value = ''
   }
 }
 
