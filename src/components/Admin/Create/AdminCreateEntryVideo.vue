@@ -98,28 +98,31 @@ async function onUpload (evt) {
     }
     const fileName = file.name.split('.')[0].replace(' ', '').toLowerCase()
     const fileExt = file.name.split('.')[1]
-    const filePath = `${fileName}-${Date.now()}.${fileExt}`
+    const filePathUnique = `${fileName}-${Date.now()}.${fileExt}`
     fileType.value = file.type
     const { data, error: uploadError } = await sb.storage
       .from('media')
-      .upload(filePath, file)
+      .upload(filePathUnique, file)
     if (uploadError) throw uploadError
     const key = data.Key
     // getPublicUrl() is somehow not working for me, see https://github.com/supabase/supabase/issues/2908#issuecomment-911449014
     const baseURL = import.meta.env.VITE_SUPABASE_URL.toString().replace('.co', '.in')
     filePath.value = `${baseURL}/storage/v1/object/public/${key}`
   } catch (error) {
-    // TODO show error message
     console.error(error.message)
+    store.sendMessage(
+        'Ups! Something went wrong :(',
+        `We couldn't upload your video, please try again.`,
+        store.messageTypes.DANGER.id
+    )
   } finally {
     uploading.value = false
   }
 }
 
-// TODO could be reused for the other functions
+// TODO could be reused for the other functions and should be in store
 async function onCreate () {
-  // todo store
-  const { data, error } = await sb
+  const { error } = await sb
     .from('log_entries')
     .insert([
       {
@@ -148,7 +151,7 @@ async function onCreate () {
     title.value = ''
     location.value = ''
     chronological.value = ''
-    path.value = ''
+    filePath.value = ''
     fileType.value = ''
   }
 }
