@@ -7,17 +7,7 @@ export const useMainStore = defineStore('main', {
     logs: [],
     entryTypes: ENTRY_TYPES,
     messageTypes: MESSAGE_TYPES,
-    messages: [{
-      id: Date.now().toString() + (Math.floor(Math.random() * 100)).toString(),
-      title: 'Test1',
-      description: 'Lorem Ipsum',
-      type: 1
-    },{
-      id: Date.now().toString() + (Math.floor(Math.random() * 100)).toString(),
-      title: 'Test2',
-      description: 'Lorem Ipsum',
-      type: 1
-    }],
+    messages: [],
   }),
   getters: {
     logById(state) {
