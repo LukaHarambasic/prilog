@@ -1,5 +1,8 @@
 <template>
   <section>
+    <button @click="login()">
+      LOGIN
+    </button>
     <ul
       v-if="store.logs"
       class="logs"
@@ -30,13 +33,23 @@
 <script setup>
 import { useMainStore } from '@/store'
 import { onMounted } from 'vue'
+import { sb } from '@/assets/js/supabase'
 
 const store = useMainStore()
 
 onMounted(async () => {
   await store.fetchLogs()
+  console.log(sb.auth.user())
 })
 
+async function login () {
+  const { user, session, error } = await sb.auth.signIn({
+    provider: 'google'
+  })
+  console.log(user)
+  console.log(session)
+  console.error(error)
+}
 </script>
 
 <style lang="sass" scoped>
