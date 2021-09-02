@@ -65,6 +65,7 @@ const store = useMainStore()
 
 // Types
 const selectedType = ref('')
+// inspired by https://stackoverflow.com/questions/66384268/how-to-use-component-is-in-vue-3-script-setup
 const selectedComponent = computed(() => {
   // TODO default should also be reflected in the dropdown
   switch (selectedType.value) {
