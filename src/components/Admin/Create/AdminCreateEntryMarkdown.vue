@@ -78,7 +78,7 @@ async function onCreate () {
     .from('log_entries')
     .insert([
       {
-        type: store.types.MARKDOWN.id,
+        type: store.entryTypes.MARKDOWN.id,
         title: title.value,
         location: location.value,
         chronological: chronological.value,

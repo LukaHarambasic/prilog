@@ -95,11 +95,13 @@ async function onUpload (evt) {
         .upload(filePath, file)
     if (uploadError) throw uploadError
     const key = data.Key
+    console.log(key)
     const { publicURL, error: publicUrlError } = sb
         .storage
-        .from('public-bucket')
-        .getPublicUrl(key)
+        .from('media')
+        .getPublicUrl(key.replace('media/'))
     path.value = publicURL
+    console.log(publicURL)
   } catch (error) {
     // TODO show error message
     console.error(error.message)
@@ -114,7 +116,7 @@ async function onCreate () {
       .from('log_entries')
       .insert([
         {
-          type: store.types.VIDEO.id,
+          type: store.entryTypes.VIDEO.id,
           title: title.value,
           location: location.value,
           chronological: chronological.value,

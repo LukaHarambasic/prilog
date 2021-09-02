@@ -1,11 +1,23 @@
 import { defineStore } from 'pinia'
-import { TYPES as RAW_TYPES } from '@/assets/js/consts/types'
+import { ENTRY_TYPES, MESSAGE_TYPES } from '@/assets/js/consts/types'
 import { sb } from '@/assets/js/supabase'
 
 export const useMainStore = defineStore('main', {
   state: () => ({
     logs: [],
-    types: RAW_TYPES,
+    entryTypes: ENTRY_TYPES,
+    messageTypes: MESSAGE_TYPES,
+    messages: [{
+      id: Date.now().toString() + (Math.floor(Math.random() * 100)).toString(),
+      title: 'Test1',
+      description: 'Lorem Ipsum',
+      type: 1
+    },{
+      id: Date.now().toString() + (Math.floor(Math.random() * 100)).toString(),
+      title: 'Test2',
+      description: 'Lorem Ipsum',
+      type: 1
+    }],
   }),
   getters: {
     logById(state) {
@@ -28,6 +40,23 @@ export const useMainStore = defineStore('main', {
       } else {
         this.logs = data
       }
+    },
+    sendMessage(title, description, type) {
+      const id = Date.now().toString() + (Math.floor(Math.random() * 100)).toString()
+      this.messages.push({
+        id,
+        title,
+        description,
+        type
+      })
+      setTimeout(() => {
+        const index = this.messages.findIndex(message => message.id === id)
+        this.messages.splice(index, 1)
+      }, 5000)
+    },
+    removeMessage(id) {
+      const index = this.messages.findIndex(message => message.id === id)
+      this.messages.splice(index, 1)
     }
   }
 })

@@ -124,7 +124,7 @@ async function onCreate () {
       .from('log_entries')
       .insert([
         {
-          type: store.types.IMAGE.id,
+          type: store.entryTypes.IMAGE.id,
           title: title.value,
           location: location.value,
           chronological: chronological.value,

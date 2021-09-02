@@ -34,17 +34,15 @@ onBeforeMount(async () => {
   log.value = store.logs.find(log => log.id === id)
 })
 
-const types = store.types
-
 function currentComponent (type) {
   switch (parseInt(type)) {
-    case types.IMAGE.id:
+    case store.entryTypes.IMAGE.id:
       return defineAsyncComponent(() => import('@/components/LogsDetails/LogsDetailsEntryImage.vue'))
-    case types.LOCATION.id:
+    case store.entryTypes.LOCATION.id:
       return defineAsyncComponent(() => import('@/components/LogsDetails/LogsDetailsEntryLocation.vue'))
-    case types.MARKDOWN.id:
+    case store.entryTypes.MARKDOWN.id:
       return defineAsyncComponent(() => import('@/components/LogsDetails/LogsDetailsEntryMarkdown.vue'))
-    case types.VIDEO.id:
+    case store.entryTypes.VIDEO.id:
       return defineAsyncComponent(() => import('@/components/LogsDetails/LogsDetailsEntryVideo.vue'))
     default:
       return defineAsyncComponent(() => import('@/components/LogsDetails/LogsDetailsEntryMarkdown.vue'))

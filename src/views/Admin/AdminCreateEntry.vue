@@ -14,7 +14,7 @@
             Select a Type
           </option>
           <option
-            v-for="type in types"
+            v-for="type in store.entryTypes"
             :key="type.id"
             :value="type.id"
           >
@@ -51,22 +51,23 @@
 
 <script setup>
 import { computed, defineAsyncComponent, onMounted, ref } from 'vue'
-import { TYPES as RAW_TYPES } from '@/assets/js/consts/types'
 import { sb } from '@/assets/js/supabase'
+import { useMainStore } from '@/store'
+
+const store = useMainStore()
 
 // Types
-const types = ref(RAW_TYPES)
 const selectedType = ref('')
 const selectedComponent = computed(() => {
   // TODO default should also be reflected in the dropdown
   switch (selectedType.value) {
-    case types.value.IMAGE.id:
+    case store.entryTypes.IMAGE.id:
       return defineAsyncComponent(() => import('@/components/Admin/Create/AdminCreateEntryImage.vue'))
-    case types.value.LOCATION.id:
+    case store.entryTypes.LOCATION.id:
       return defineAsyncComponent(() => import('@/components/Admin/Create/AdminCreateEntryLocation.vue'))
-    case types.value.MARKDOWN.id:
+    case store.entryTypes.MARKDOWN.id:
       return defineAsyncComponent(() => import('@/components/Admin/Create/AdminCreateEntryMarkdown.vue'))
-    case types.value.VIDEO.id:
+    case store.entryTypes.VIDEO.id:
       return defineAsyncComponent(() => import('@/components/Admin/Create/AdminCreateEntryVideo.vue'))
     default:
       return defineAsyncComponent(() => import('@/components/Admin/Create/AdminCreateEntryMarkdown.vue'))

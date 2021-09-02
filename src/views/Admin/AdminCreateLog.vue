@@ -36,6 +36,9 @@
 // Form: Create new log entry
 import { sb } from '@/assets/js/supabase'
 import { computed, ref } from 'vue'
+import { useMainStore } from '@/store'
+
+const store = useMainStore()
 
 // Form: Fields
 const title = ref('')
@@ -61,7 +64,13 @@ async function onCreate () {
     console.log('ERROR')
     console.log(error)
   } else {
-    console.log(data)
+    store.sendMessage(
+        'New Log created!',
+        `Congratulations you created the log "${title.value}". Have fun!`,
+        store.messageTypes.SUCCESS.id
+    )
+    title.value = ''
+    description.value = ''
   }
 }
 

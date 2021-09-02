@@ -32,24 +32,19 @@
       </small>
     </footer>
   </div>
+  <LayoutMessages />
 </template>
 
 <script setup>
-// Check out https://github.com/vuejs/rfcs/blob/master/active-rfcs/0040-script-setup.md
-// import { useMainStore } from '@/store'
-//
-// const store = useMainStore()
-//
-// const counter = store.counter
-//
-// console.log(counter)
+import LayoutMessages from '@/components/Layout/LayoutMessages.vue'
+
 </script>
 
 <style lang="sass">
 *, html
   padding: 0
   margin: 0
-#app
+body
   font-family: Helvetica, Arial, sans-serif
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
@@ -118,4 +113,9 @@ main
   margin: 0 0 2rem 0
 footer
   text-align: center
+#teleport
+  position: fixed
+  bottom: 0
+  right: 0
+  z-index: 1000
 </style>
