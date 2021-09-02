@@ -1,25 +1,23 @@
 <template>
-  <section class="wrapper">
-    <h3
-      v-if="title"
-      class="title"
+  <h3
+    v-if="title"
+    class="title"
+  >
+    {{ title }}
+  </h3>
+  <div class="meta">
+    <div
+      v-if="location"
+      class="location"
     >
-      {{ title }}
-    </h3>
-    <div class="meta">
-      <div
-        v-if="location"
-        class="location"
-      >
-        {{ location }}
-      </div>
-      <time
-        v-if="chronological"
-        class="chronological"
-      >{{ chronologicalFormatted }}</time>
+      {{ location }}
     </div>
-    <slot />
-  </section>
+    <time
+      v-if="chronological"
+      class="chronological"
+    >{{ chronologicalFormatted }}</time>
+  </div>
+  <slot />
 </template>
 
 <script setup>
