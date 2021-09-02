@@ -35,8 +35,6 @@ const location = ref(entry.value.location)
 const chronological = ref(entry.value.chronological)
 const video = ref(entry.value.file_path)
 const type = ref(entry.value.file_type)
-
-console.log(type.value)
 </script>
 
 <style lang="sass" scoped>

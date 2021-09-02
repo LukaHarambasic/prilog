@@ -116,6 +116,7 @@ async function onUpload (evt) {
   }
 }
 
+// TODO could be reused for the other functions
 async function onCreate () {
   // todo store
   const { data, error } = await sb
@@ -141,7 +142,7 @@ async function onCreate () {
   } else {
     store.sendMessage(
         'New Entry created!',
-        `Congratulations you created the entry "${title.value}".`,
+        `Congratulations you created the video entry "${title.value}".`,
         store.messageTypes.SUCCESS.id
     )
     title.value = ''
@@ -153,7 +154,7 @@ async function onCreate () {
 }
 
 // Form: Validation
-const isValid = computed(() => !!logId.value && !!title.value && !!location.value && !!chronological.value && !!path.value)
+const isValid = computed(() => !!logId.value && !!title.value && !!location.value && !!chronological.value && !!filePath.value)
 
 </script>
 
