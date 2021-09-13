@@ -7,7 +7,8 @@ export const useMainStore = defineStore('main', {
     logs: [],
     entryTypes: ENTRY_TYPES,
     messageTypes: MESSAGE_TYPES,
-    messages: []
+    messages: [],
+    user: null
   }),
   getters: {
     logById (state) {
@@ -47,6 +48,10 @@ export const useMainStore = defineStore('main', {
     removeMessage (id) {
       const index = this.messages.findIndex(message => message.id === id)
       this.messages.splice(index, 1)
+    },
+    setUser () {
+      if (this.user === null) this.user = null
+      this.user = sb.auth.user()
     }
   }
 })

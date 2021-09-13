@@ -6,20 +6,7 @@
           prilog.
         </router-link>
       </h1>
-      <nav>
-        <ul>
-          <li>
-            <router-link to="/admin/create/log">
-              Create Log
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/admin/create/entry">
-              Create Entry
-            </router-link>
-          </li>
-        </ul>
-      </nav>
+      <LayoutNavigation />
     </header>
     <main>
       <router-view />
@@ -37,7 +24,15 @@
 
 <script setup>
 import LayoutMessages from '@/components/Layout/LayoutMessages.vue'
+import LayoutNavigation from '@/components/Layout/LayoutNavigation.vue'
+import { useMainStore } from '@/store'
+import { onMounted } from 'vue'
 
+const store = useMainStore()
+
+onMounted(async () => {
+  store.setUser()
+})
 </script>
 
 <style lang="sass">
