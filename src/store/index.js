@@ -50,8 +50,24 @@ export const useMainStore = defineStore('main', {
       this.messages.splice(index, 1)
     },
     setUser () {
-      if (this.user === null) this.user = null
+      console.log('setUser')
       this.user = sb.auth.user()
+      console.log(this.user)
+    },
+    async loginUser () {
+      console.log('Login')
+      const { user, session, error } = await sb.auth.signIn({
+        provider: 'google'
+      })
+      console.log(user)
+      console.log(session)
+      console.error(error)
+      this.setUser()
+    },
+    logoutUser () {
+      console.log('Logout')
+      sb.auth.signOut()
+      this.setUser()
     }
   }
 })

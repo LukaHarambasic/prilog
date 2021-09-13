@@ -21,6 +21,12 @@ import { useMainStore } from '@/store'
 const store = useMainStore()
 </script>
 
-<style scoped>
-
+<style lang="sass" scoped>
+nav
+  ul
+    list-style: none
+    margin: 0
+    padding: 0
+  li
+    margin: 0 0 .25rem 0
 </style>

@@ -11,13 +11,7 @@
     <main>
       <router-view />
     </main>
-    <footer>
-      <small>
-        <router-link to="/">
-          prilog.
-        </router-link>
-      </small>
-    </footer>
+    <LayoutFooter />
   </div>
   <LayoutMessages />
 </template>
@@ -25,12 +19,18 @@
 <script setup>
 import LayoutMessages from '@/components/Layout/LayoutMessages.vue'
 import LayoutNavigation from '@/components/Layout/LayoutNavigation.vue'
+import LayoutFooter from '@/components/Layout/LayoutFooter.vue'
 import { useMainStore } from '@/store'
 import { onMounted } from 'vue'
+import { sb } from '@/assets/js/supabase'
 
 const store = useMainStore()
 
 onMounted(async () => {
+  store.setUser()
+})
+
+sb.auth.onAuthStateChange((event, session) => {
   store.setUser()
 })
 </script>
@@ -99,17 +99,8 @@ header
   h1
     font-size: 1.25rem
     margin: 0 0 .5rem 0
-  nav
-    ul
-      list-style: none
-      margin: 0
-      padding: 0
-      li
-        margin: 0 0 .25rem 0
 main
   margin: 0 0 2rem 0
-footer
-  text-align: center
 #teleport
   position: fixed
   bottom: 0
